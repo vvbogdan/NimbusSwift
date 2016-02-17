@@ -9,7 +9,7 @@ import Foundation
 public class MutableTableModel : TableModel {
   var mutableModel: TableCellObjectModel
 
-  public override init(sections: [TableCellObjectModel.Section], delegate: TableModelDelegate) {
+  override init(sections: [TableCellObjectModel.Section], delegate: TableModelDelegate) {
     self.mutableModel = TableCellObjectModel(sections: sections)
     super.init(sections: [], delegate: delegate)
   }

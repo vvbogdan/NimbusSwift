@@ -36,7 +36,7 @@ public class TableModel : NSObject {
   let model: TableCellObjectModel
   weak var delegate: TableModelDelegate?
 
-  public init(sections: [TableCellObjectModel.Section], delegate: TableModelDelegate) {
+  init(sections: [TableCellObjectModel.Section], delegate: TableModelDelegate) {
     self.model = TableCellObjectModel(sections: sections)
     self.delegate = delegate
     super.init()

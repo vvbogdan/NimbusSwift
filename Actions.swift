@@ -73,10 +73,10 @@ struct ObjectActions {
     }
     var shouldDeselect = false
     if let tap = tap {
-      shouldDeselect |= tap(object: object, indexPath: indexPath)
+      shouldDeselect = tap(object: object, indexPath: indexPath)
     }
     if let tapSelector = tapSelector {
-      shouldDeselect |= tapSelector.performAction(object, indexPath: indexPath)!
+      shouldDeselect = tapSelector.performAction(object, indexPath: indexPath)!
     }
     return shouldDeselect
   }

@@ -56,8 +56,8 @@ extension TableCellFactory {
 
     // Append object class to reuse identifier
 
-    if (object!.shouldAppendClassNameToReuseIdentifier? != nil) && object!.shouldAppendClassNameToReuseIdentifier!() {
-      let typedObject: AnyObject = object as AnyObject
+    if (object!.shouldAppendClassNameToReuseIdentifier != nil) && object!.shouldAppendClassNameToReuseIdentifier!() {
+      let typedObject: AnyObject = object as! AnyObject
       identifier = identifier.stringByAppendingString(NSStringFromClass(typedObject.dynamicType))
     }
 
@@ -72,12 +72,12 @@ extension TableCellFactory {
 
     var cell = tableView.dequeueReusableCellWithIdentifier(identifier) as UITableViewCell?
     if cell == nil {
-      cell = tableCellClass(style: style, reuseIdentifier: identifier)
+      cell = tableCellClass.init(style: style, reuseIdentifier: identifier)
     }
 
     // Provide the object to the cell
 
-    if let tableCell = cell as TableCell? {
+    if let tableCell = cell as! TableCell? {
       tableCell.updateCellWithObject(object!)
     }
 

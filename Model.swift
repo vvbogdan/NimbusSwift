@@ -83,8 +83,8 @@ extension Model : ModelObjectInterface {
   :returns: The index path of needle, if it was found, otherwise nil.
   */
   func pathForObject(needle: T) -> NSIndexPath? {
-    for (sectionIndex, section) in enumerate(self.sections) {
-      for (objectIndex, object) in enumerate(section.objects) {
+    for (sectionIndex, section) in self.sections.enumerate() {
+      for (objectIndex, object) in section.objects.enumerate() {
         if object === needle {
           return NSIndexPath(forRow: objectIndex, inSection: sectionIndex)
         }
@@ -95,13 +95,15 @@ extension Model : ModelObjectInterface {
 }
 
 extension Model : MutableModelObjectInterface {
-  mutating func addObject(object: T) -> [NSIndexPath] {
+   mutating func addObject(object: T) -> [NSIndexPath] {
     self.ensureMinimalState()
     return self.addObject(object, toSection: self.sections.count - 1)
   }
 
   mutating func addObjects(objects: [T]) -> [NSIndexPath] {
-    return objects.map(self.addObject).reduce([], combine: +)
+    return objects.map({(object: T) -> [NSIndexPath] in
+        return addObject(object)
+    }).reduce([], combine: +)
   }
 
   mutating func addObject(object: T, toSection sectionIndex: Int) -> [NSIndexPath] {
@@ -112,7 +114,7 @@ extension Model : MutableModelObjectInterface {
   }
 
   mutating func addObjects(objects: [T], toSection sectionIndex: Int) -> [NSIndexPath] {
-    return objects.map { (var object) in self.addObject(object, toSection: sectionIndex) }
+    return objects.map { ( object) in self.addObject(object, toSection: sectionIndex) }
       .reduce([], combine: +)
   }
 
