@@ -59,4 +59,8 @@ extension MutableTableModel : MutableModelObjectInterface {
   public func setFooter(footer: String, atIndex sectionIndex: Int) -> NSIndexSet {
     return self.mutableModel.setFooter(footer, atIndex: sectionIndex)
   }
+    
+  public func objects(sectionIndex: Int) -> [AnyObject] {
+    return self.mutableModel.sections[sectionIndex].objects
+  }
 }

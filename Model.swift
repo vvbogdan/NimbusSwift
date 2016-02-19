@@ -27,6 +27,8 @@ protocol MutableModelObjectInterface {
 
   mutating func setFooterForLastSection(footer: String) -> NSIndexSet
   mutating func setFooter(footer: String, atIndex sectionIndex: Int) -> NSIndexSet
+    
+  mutating func objects(sectionIndex: Int) -> [ObjectType]
 }
 
 /**
@@ -155,6 +157,10 @@ extension Model : MutableModelObjectInterface {
     }
 
     return NSIndexSet(index: sectionIndex)
+  }
+    
+  mutating func objects(sectionIndex: Int) -> [T] {
+    return self.sections[sectionIndex].objects
   }
 }
 
