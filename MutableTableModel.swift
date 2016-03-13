@@ -63,4 +63,8 @@ extension MutableTableModel : MutableModelObjectInterface {
   public func objects(sectionIndex: Int) -> [AnyObject] {
     return self.mutableModel.sections[sectionIndex].objects
   }
+    
+  public func numberOfSections() -> Int {
+    return self.mutableModel.sections.count
+  }
 }

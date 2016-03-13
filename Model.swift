@@ -29,6 +29,8 @@ protocol MutableModelObjectInterface {
   mutating func setFooter(footer: String, atIndex sectionIndex: Int) -> NSIndexSet
     
   mutating func objects(sectionIndex: Int) -> [ObjectType]
+    
+  mutating func numberOfSections() -> Int
 }
 
 /**
@@ -161,6 +163,10 @@ extension Model : MutableModelObjectInterface {
     
   mutating func objects(sectionIndex: Int) -> [T] {
     return self.sections[sectionIndex].objects
+  }
+    
+  mutating func numberOfSections() -> Int {
+    return self.sections.count
   }
 }
 
